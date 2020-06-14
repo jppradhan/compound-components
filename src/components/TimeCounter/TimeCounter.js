@@ -25,20 +25,22 @@ const ALLOWED_KEYS = [
 const sheet = new CSSStyleSheet();
 
 sheet.replaceSync(`
-  input {
+  :host input {
     border: 0;
     outline: none;
     padding: 10px;
     width: 30%;
     display: inline-block;
+    color: inherit;
   }
-  div {
+  :host div {
     border: 1px solid #000;
     border-radius: 4px;
     overflow: hidden;
     width: 100%;
+    color: inherit;
   }
-  div.focused {
+  :host .focused {
     border: 1px solid blue;
   }
 `);
