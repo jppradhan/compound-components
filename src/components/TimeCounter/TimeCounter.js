@@ -95,8 +95,9 @@ class TimeCounter extends HTMLElement {
     const inputValues = [];
     inputs.forEach((input) => {
       inputValues.push(input.value);
-    }, []);
+    });
     this.setAttribute('value', inputValues.join(':'));
+    this.triggerChange();
   }
 
   handleFocus(index, event) {
@@ -160,6 +161,11 @@ class TimeCounter extends HTMLElement {
     this.inputs.forEach((input, index) => {
       input.setAttribute('value', this.value[index]);
     });
+  }
+
+  triggerChange() {
+    const e = new Event('change');
+    this.dispatchEvent(e);
   }
 
   connectedCallback() {
