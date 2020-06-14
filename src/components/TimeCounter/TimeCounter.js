@@ -34,10 +34,12 @@ sheet.replaceSync(`
   }
   div {
     border: 1px solid #000;
+    border-radius: 4px;
+    overflow: hidden;
     width: 100%;
   }
   div.focused {
-    outline: 1px solid blue;
+    border: 1px solid blue;
   }
 `);
 
@@ -56,10 +58,12 @@ class TimeCounter extends HTMLElement {
     this.shadowRoot.adoptedStyleSheets = [sheet];
     this.shadowRoot.innerHTML = this.html;
     this.inputs = [];
+    this.focusCounter = 0;
   }
 
-  handleFocus(event) {
+  handleFocus(index, event) {
     event.target.parentNode.classList.add('focused');
+    this.focusCounter = index;
   }
 
   handleFocusOut(event) {
@@ -85,19 +89,31 @@ class TimeCounter extends HTMLElement {
         event.target.value = isNaN(value) ? 0 : value - 1;
       }
     }
+    if (event.key === 'ArrowRight') {
+      if (this.focusCounter < 2) {
+        this.focusCounter = this.focusCounter + 1;
+        this.inputs[this.focusCounter].focus();
+      }
+    }
+    if (event.key === 'ArrowLeft') {
+      if (this.focusCounter > 0) {
+        this.focusCounter = this.focusCounter - 1;
+        this.inputs[this.focusCounter].focus();
+      }
+    }
   }
 
-  bindEvents() {
-    this.inputs.forEach((input) => {
-      input.addEventListener('focus', this.handleFocus);
-      input.addEventListener('focusout', this.handleFocusOut);
-      input.addEventListener('keydown', this.handleKeyDown);
+  attachEvents() {
+    this.inputs.forEach((input, index) => {
+      input.addEventListener('focus', this.handleFocus.bind(this, index));
+      input.addEventListener('focusout', this.handleFocusOut.bind(this));
+      input.addEventListener('keydown', this.handleKeyDown.bind(this));
     });
   }
 
   connectedCallback() {
     this.inputs = this.shadowRoot.querySelectorAll('input');
-    this.bindEvents();
+    this.attachEvents();
   }
 
   disconnectedCallback() {
