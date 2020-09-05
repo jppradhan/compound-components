@@ -4,3 +4,4 @@
  **/
 
 import './components/TimeCounter/TimeCounter';
+import './components/Camera/Camera';
