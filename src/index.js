@@ -5,3 +5,4 @@
 
 import './components/TimeCounter/TimeCounter';
 import './components/Camera/Camera';
+import './components/DateFormat/DateFormat';

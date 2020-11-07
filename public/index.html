@@ -15,19 +15,27 @@
     <img id="img" src="/logo.svg" />
     <script type="module" src="/_dist_/index.js"></script>
     <h2>Timer component</h2>
-    <time-counter
+    <cc-time-counter
       style="color: red;"
       value="02:30:30"
       id="time-counter"
-    ></time-counter>
+    ></cc-time-counter>
     <h2>Camera component</h2>
     <button id="camera">Start camera</button>
     <div style="width: 300px; height: 200px; border: 1px solid red;">
-      <compound-camera></compound-camera>
+      <cc-camera></cc-camera>
+    </div>
+    <h2>Date formatting component</h2>
+    <div>
+      <cc-date-format
+        value="01-01-2021"
+        format="DD/MM/YYYY"
+        style="color: blue; font-weight: bold;"
+      ></cc-date-format>
     </div>
     <script>
       window.addEventListener('load', function () {
-        const camera = document.querySelector('compound-camera');
+        const camera = document.querySelector('cc-camera');
         document
           .querySelector('#camera')
           .addEventListener('click', function () {

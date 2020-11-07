@@ -73,4 +73,4 @@ class Camera extends HTMLElement {
   }
 }
 
-customElements.define('compound-camera', Camera);
+customElements.define('cc-camera', Camera);
