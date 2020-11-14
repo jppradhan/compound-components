@@ -1,10 +1,12 @@
+import BaseElement from '../../base/BaseElement';
+
 const sheet = new CSSStyleSheet();
 const DEFAULT_LOCALE = 'en-GB';
 
 sheet.replaceSync(`
 `);
 
-class DateFormat extends HTMLElement {
+class DateFormat extends BaseElement {
   constructor() {
     super();
   }
@@ -29,7 +31,13 @@ class DateFormat extends HTMLElement {
       this.date,
     );
   }
-
+  // sometimes even the US needs 24-hour time
+  // options = {
+  //   year: 'numeric', month: 'numeric', day: 'numeric',
+  //   hour: 'numeric', minute: 'numeric', second: 'numeric',
+  //   hour12: false,
+  //   timeZone: 'America/Los_Angeles'
+  // };
   get formatOptions() {
     let options = {
       day: 'numeric',
@@ -37,14 +45,29 @@ class DateFormat extends HTMLElement {
       year: 'numeric',
     };
 
-    if (this.getAttribute('day')) {
-      options['day'] = this.getAttribute('day');
+    if (this.props['day']) {
+      options['day'] = this.props['day'];
     }
-    if (this.getAttribute('month')) {
-      options['month'] = this.getAttribute('month');
+    if (this.props['month']) {
+      options['month'] = this.props['month'];
     }
-    if (this.getAttribute('year')) {
-      options['year'] = this.getAttribute('year');
+    if (this.props['year']) {
+      options['year'] = this.props['year'];
+    }
+    if (this.props['hour']) {
+      options['hour'] = this.props['hour'];
+    }
+    if (this.props['minute']) {
+      options['minute'] = this.props['minute'];
+    }
+    if (this.props['second']) {
+      options['second'] = this.props['second'];
+    }
+    if (this.props['hour12']) {
+      options['hour12'] = this.props['hour12'];
+    }
+    if (this.props['timeZone']) {
+      options['timeZone'] = this.props['timeZone'];
     }
     return options;
   }
