@@ -181,4 +181,4 @@ class TimeCounter extends HTMLElement {
   }
 }
 
-customElements.define('time-counter', TimeCounter);
+customElements.define('cc-time-counter', TimeCounter);
