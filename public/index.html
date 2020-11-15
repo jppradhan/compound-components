@@ -33,6 +33,11 @@
         style="color: blue; font-weight: bold;"
       ></cc-date-format>
     </div>
+    <div>
+      <cc-get url="https://api.github.com/users">
+        <h2>After rendering</h2>
+      </cc-get>
+    </div>
     <script>
       window.addEventListener('load', function () {
         const camera = document.querySelector('cc-camera');
